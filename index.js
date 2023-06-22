@@ -124,7 +124,7 @@ function addEmployee() {
             name: "manager_id",
         },
     ]).then(( {first_name, last_name, role_id, manager_id} ) => {
-        db.query("Insert into employee_data SET ?;", {first_name, last_name, role_id, manager_id}, (e) => {
+        db.query("Insert into employee_data SET ?;", {first_name:first_name, last_name:last_name, role_id:role_id, manager_id:manager_id}, (e) => {
             if (e) console.log(e);
             else console.log("Employee was added")
             startQuestions();
