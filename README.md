@@ -31,3 +31,4 @@ Testing was done for this project via the console log.
 Questions can be directed to robstowe94@gmail.com
 
 https://github.com/robstowe
+![Capture](https://github.com/robstowe/Employee_Tracker/assets/131800636/c4bc9a51-97c3-4e88-8488-43d7199cc3d3)
