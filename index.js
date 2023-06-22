@@ -138,7 +138,7 @@ function updateRole() {
 
         {
             type: "input",
-            message: "Enter the employees id you'd like to change",
+            message: "Enter the employees last name you'd like to change",
             name: "last_name",
         },
         {
