@@ -11,11 +11,13 @@ const db = mysql.createConnection({
     console.log('Connected to the employees database')
 );
 
+
 function startQuestions() {
+    console.log("Welcome to tracker");
     inquirer.prompt([
         {
             type: "list",
-            message: "Would you like to do?",
+            message: "What would you like to do?",
             name: "primaryOptions",
             choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee's role"]
 
@@ -92,45 +94,66 @@ function addRole() {
             name: "newRole",
         }
     ]).then((res) => {
-        db.query("Insert into employee_jobs SET ?;", {
+        db.query("Insert into employee_jobs SET ?", {
             job_title: res.newRole
         });
         startQuestions();
     })
 }
-//i think I need to add additional prompts here for adding employee name, salary, and department
+
 function addEmployee() {
     inquirer.prompt([
         {
             type: "input",
             message: "What is the first name of the Employee you would like to add?",
-            name: "newFirst",
+            name: "first_name",
         },
         {
             type: "input",
             message: "What is the last name of the Employee you would like to add?",
-            name: "newLast",
+            name: "last_name",
         },
         {
             type: "input",
             message: "What is their role?",
-            name: "newRole",
+            name: "role_id",
         },
         {
-            type: "confirm",
-            message: "Do they have a manager?",
-            name: "confManager",
+            type: "number",
+            message: "Do they have a manager? If yes insert their employee number, if no enter 0",
+            name: "manager_id",
+        },
+    ]).then(( {first_name, last_name, role_id, manager_id} ) => {
+        db.query("Insert into employee_data SET ?;", {first_name, last_name, role_id, manager_id}, (e) => {
+            if (e) console.log(e);
+            else console.log("Employee was added")
+            startQuestions();
+        });
+        
+    })
+}
+function updateRole() {
+    inquirer.prompt([
+
+        {
+            type: "input",
+            message: "Enter the employees id you'd like to change",
+            name: "last_name",
+        },
+        {
+            type: "input",
+            message: "What is their new role?",
+            name: "role_id",
         },
     ]).then((res) => {
-        db.query("Insert into employee_data SET ?;", {
-            first_name: res.newFirst,
-            last_name: res.newLast,
-            role_id: res.newRole,
-            manager_id: res.confManager,
+        db.query("UPDATE employee_data SET role_id = ? WHERE last_name = ?;", [res.role_id, res.last_name], (e) => {
+            if (e) console.log(e);
+            else console.log("Employee was updated")
+            startQuestions();
         });
-        startQuestions();
+        
     })
 }
 
 
-startQuestions();    
+startQuestions();
