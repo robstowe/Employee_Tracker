@@ -10,9 +10,8 @@ const db = mysql.createConnection({
 },
     console.log('Connected to the employees database')
 );
+
 function startQuestions() {
-
-
     inquirer.prompt([
         {
             type: "list",

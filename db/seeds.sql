@@ -33,4 +33,4 @@ VALUES  ('Rob', 'Stowe', 1),
         ('Nick', 'Giannini', 8);
 
 INSERT INTO employee_data (first_name, last_name, role_id, manager_id)
-VALUES ('Josshy', 'Olea', 3, 5);
+VALUES ('Josshy', 'Olea', 3, 4);
