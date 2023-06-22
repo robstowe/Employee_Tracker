@@ -94,7 +94,7 @@ function addRole() {
             name: "newRole",
         }
     ]).then((res) => {
-        db.query("Insert into employee_jobs SET ?", {
+        db.query("Insert into employee_jobs SET ?;", {
             job_title: res.newRole
         });
         startQuestions();
@@ -123,6 +123,7 @@ function addEmployee() {
             message: "Do they have a manager? If yes insert their employee number, if no enter 0",
             name: "manager_id",
         },
+        //first_name:first_name, etc are being passed as a key value pair
     ]).then(( {first_name, last_name, role_id, manager_id} ) => {
         db.query("Insert into employee_data SET ?;", {first_name:first_name, last_name:last_name, role_id:role_id, manager_id:manager_id}, (e) => {
             if (e) console.log(e);
